@@ -1,0 +1,18 @@
+.hello {
+  color: red;
+}
+.box1 {
+  width: 100px;
+  height: 100px;
+  background: url("./vue.png") no-repeat;
+}
+.box2 {
+  width: 100px;
+  height: 100px;
+  background: url("./www_electronjs.svg") no-repeat;
+}
+.box3 {
+  width: 100px;
+  height: 100px;
+  background: url("./webpack.png") no-repeat;
+}
