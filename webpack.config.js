@@ -1,13 +1,15 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  // watch: true,
+  entry: "./src/js/index.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, 'dist'),
-    publicPath: "./"
+    publicPath: "/"
     // 方式一： 修改资源的输出路径
     // assetModuleFilename: 'images/[hash][ext][query]'
   },
@@ -64,10 +66,26 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }), // 清理/dist文件夹
     new HtmlWebpackPlugin({
+      title: 'Devepoment',
       // 复制./src/index.html，并自动映入打包输出的所有资源(css/js)
       template: './src/index.html'
     })
 
-  ]
+  ],
+  // 开发服务器devServer：用来自动化（自动编译，自动打开浏览器，自动刷新浏览器~~）
+  // 特点： 自会在内存中编译打包，不会有任何输出(不会生成/dist)。
+  // 启动devServer指令为： webpack serve;也可以在package.json的scripts里添加"start": "webpack serve --open",
+
+  devServer: {
+    // contentBase: path.join(__dirname, "dist"),
+    port: 3030,
+    https: true,
+    // inline: false,
+    open: 'Chrome', // macOS、Linux上是 'Google Chrome' ，在Windows上是 'Chrome' 。
+    // watchOptions: {
+    //   poll:true
+    // },
+  }
 }
